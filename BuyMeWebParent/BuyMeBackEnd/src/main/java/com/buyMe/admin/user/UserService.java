@@ -116,13 +116,18 @@ public class UserService {
 	
 	//method to return page of user object
 	//modifying it for sorting
-	public Page<User> listByPage(int pageNum ,String sortField,String sortDir){
+	public Page<User> listByPage(int pageNum ,String sortField,String sortDir,String keyword){
 		//creating sort object spring framework
 		Sort sort = Sort.by(sortField);
 		//check ascending or desc
 		sort  = sortDir.equals("asc") ? sort.ascending() : sort.descending();
 		// add a param sort
 		Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE ,sort);
+		//if keyword not null then show users by keyword
+		if (keyword != null) {
+			return userRepo.findAll(keyword, pageable);
+		}
+		//else return simply users
 		return userRepo.findAll(pageable);
 	}
 		

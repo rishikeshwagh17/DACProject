@@ -40,7 +40,7 @@ public class UserController {
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
 		//adding sorting parameter so that it by default sort by fname
-		return listByPage(1, model, "firstname","asc");
+		return listByPage(1, model, "firstname","asc",null);
 	} 
 	
 	//handling method for creating new user when user click on create new user we have to show him form
@@ -152,8 +152,9 @@ public class UserController {
 	//new modified method
 	//method to code listbypage and list first page
 	@GetMapping("/users/page/{pageNum}")
-	public String listByPage(@PathVariable(name ="pageNum") int pageNum,Model model, @Param("sortField") String sortField, @Param("sortDir") String sortDir) {
-		Page<User> page= service.listByPage(pageNum ,sortField,sortDir);
+	public String listByPage(@PathVariable(name ="pageNum") int pageNum,Model model, @Param("sortField") String sortField, 
+			@Param("sortDir") String sortDir,@Param("keyword") String keyword) {
+		Page<User> page= service.listByPage(pageNum ,sortField,sortDir,keyword);
 		//debug sortFiled and sortDir
 		System.out.println("sort field and sort Order" + sortField + " " + sortDir);
 		List<User> listUsers = page.getContent();
@@ -177,6 +178,7 @@ public class UserController {
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", reverseSortDir);
+		model.addAttribute("keyword", keyword);
 		
 		System.out.println("total pages = " + page.getTotalPages());
 		return "users";

@@ -68,7 +68,20 @@
 		
 		<!-- check msg null or not -->
 		<div th:if="${message!=null}" class="alert alert-success text-center">[[${message}]]</div>
-
+		
+		<div>
+			<form th:action="@{/users/page/1}" class="form-inline m-3">
+				<input type="hidden" name="sortField" th:value="${sortField}" />
+				<input type="hidden" name="sortDir" th:value="${sortDir}" />
+				Filter:&nbsp;
+				<input type="search" name="keyword" th:value="${keyword}" class="form-control" required/>
+				&nbsp;&nbsp;
+				<input type="submit" value="search" class="btn btn-primary"/>
+				&nbsp;&nbsp;
+				<input type="button" value="clear" class="btn btn-secondary"/>
+			</form>
+		</div>
+		
 		<div>
 		<!-- creating table for user details -->
 			<table
@@ -150,7 +163,7 @@
 			<span>No users found</span>
 		</div>
 		<!-- pagination take from bootstrap -->
-		<div>
+		<div th:if ="${totalPages > 1}">
 			<nav>
 	  			<ul class="pagination justify-content-center">
 	    		<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
