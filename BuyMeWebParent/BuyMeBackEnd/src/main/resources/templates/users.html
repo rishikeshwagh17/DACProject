@@ -78,7 +78,7 @@
 				&nbsp;&nbsp;
 				<input type="submit" value="search" class="btn btn-primary"/>
 				&nbsp;&nbsp;
-				<input type="button" value="clear" class="btn btn-secondary"/>
+				<input type="button" value="clear" class="btn btn-secondary" onclick="clearFilter()"/>
 			</form>
 		</div>
 		
@@ -224,6 +224,11 @@
 			$("#confirmModal").modal();
 		})
 	});
+	
+	//function for clearing in search functionality
+	function clearFilter(){
+		window.location="[[@{/users}]]";
+	}
 
 </script>	
 </body>
