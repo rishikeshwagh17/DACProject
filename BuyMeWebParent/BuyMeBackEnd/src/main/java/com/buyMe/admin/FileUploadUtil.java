@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadUtil {
 	//utility class so using static method
+	//method to get get photo upload directory and and saving the file using IO handling
 	public static void saveFile(String uploadDir,String fileName, MultipartFile multipartFile) throws IOException {
 		Path uploadPath = Paths.get(uploadDir);
 		

@@ -27,7 +27,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
 	public void updateEnabledStatus(Integer id, boolean enabled);
 	
 	//method for implementing the search functionality
-	@Query("SELECT u FROM User u WHERE CONCAT(u.id,' ',u.firstname, ' ',u.lastname) LIKE %?1%")
+	@Query("SELECT u FROM User u WHERE CONCAT(u.id,' ',u.firstname, ' ',u.lastname,' ',u.email) LIKE %?1%")
 	public Page<User> findAll(String keyword, Pageable pageable);
 	
 }

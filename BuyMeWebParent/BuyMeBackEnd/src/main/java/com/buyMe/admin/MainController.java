@@ -11,4 +11,11 @@ public class MainController {
 		System.out.println("Sent Admin Home Page ");
 		return "index";
 	}
+	
+	@GetMapping("/login")
+	public String loginPage() {
+		
+		//logival view name
+		return "login";
+	}
 }

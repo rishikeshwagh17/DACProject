@@ -94,12 +94,12 @@
 						
 						<th>
 							<a th:if="${sortField != 'firstname'}" class="text-white"
-							th:href ="@{'/users/page/' + ${currentPage} + '?sortField=firstname&sortDir=' +${sortDir}}">
+							th:href ="@{'/users/page/' + ${currentPage} + '?sortField=firstname&sortDir=' +${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
 								First Name
 							</a>
 							
 							<a th:if="${sortField == 'firstname'}" class="text-white"
-							th:href ="@{'/users/page/' + ${currentPage} + '?sortField=firstname&sortDir=' +${reverseSortDir}}">
+							th:href ="@{'/users/page/' + ${currentPage} + '?sortField=firstname&sortDir=' +${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
 								First Name
 							</a>
 							<span th:if="${sortField == 'firstname'}"
@@ -167,23 +167,23 @@
 			<nav>
 	  			<ul class="pagination justify-content-center">
 	    		<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-	    			<a class="page-link" th:href="@{'/users/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
+	    			<a class="page-link" th:href="@{'/users/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
 	    		</li>
 	    		<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-	    			<a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+	    			<a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +${keyword != null ? '&keyword=' + keyword : ''}}">Previous</a>
 	    		</li>
 	    		
 	    		<li th:class="${currentPage != i ? 'page-item' : 'page-item active'}" 
 	    			th:each ="i: ${#numbers.sequence(1, totalPages)}">
-	    			<a class="page-link" th:href="@{'/users/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+	    			<a class="page-link" th:href="@{'/users/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
 	    		</li>
 	   		 	
 	
 	    		<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-	    			<a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1} +'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+	    			<a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1} +'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +${keyword != null ? '&keyword=' + keyword : ''}}">Next</a>
 	    		</li>
 	    		<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-	    			<a class="page-link" th:href="@{'/users/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+	    			<a class="page-link" th:href="@{'/users/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
 	    		</li>
 	  			</ul>
 			</nav>
