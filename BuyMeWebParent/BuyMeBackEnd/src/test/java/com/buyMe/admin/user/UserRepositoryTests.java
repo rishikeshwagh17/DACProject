@@ -23,7 +23,7 @@ import com.buyMe.common.entity.User;
 @DataJpaTest
 // to use the test on real database
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Rollback(false)
+@Rollback(true)
 public class UserRepositoryTests {
 	//ref to user repo
 	@Autowired

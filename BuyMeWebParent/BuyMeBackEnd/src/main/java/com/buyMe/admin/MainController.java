@@ -12,6 +12,8 @@ public class MainController {
 		return "index";
 	}
 	
+	
+	//handling method for login page
 	@GetMapping("/login")
 	public String loginPage() {
 		
