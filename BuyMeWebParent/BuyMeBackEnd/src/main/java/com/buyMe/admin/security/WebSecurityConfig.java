@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.formLogin()
 		.loginPage("/login")
-		.usernameParameter("email").permitAll().and().logout().permitAll();
+		.usernameParameter("email").permitAll().and().logout().permitAll(); 
 		
 	}
 
