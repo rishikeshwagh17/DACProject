@@ -75,4 +75,12 @@ public class BuyMeUserDetails implements UserDetails {
 		return this.user.getFirstname() + " " + this.user.getLastname();
 		
 	}
+	
+	public void setFirstName(String firstname) {
+		this.user.setFirstname(firstname);
+	}
+	
+	public void setLastName(String lastname) {
+		this.user.setLastname(lastname);
+	}
 }
