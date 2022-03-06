@@ -134,6 +134,24 @@ public class UserService {
 		//else return simply users
 		return userRepo.findAll(pageable);
 	}
+	
+	//method for updating user details
+	public User updateAccount(User userInForm) {
+		//find that user
+		User userInDB = userRepo.findById(userInForm.getId()).get();
+		if (!userInForm.getPassword().isEmpty()) {
+			userInDB.setPassword(userInForm.getPassword());
+			encodePassword(userInDB);
+		}
+		if (userInForm.getPhotos() != null) {
+			userInDB.setPhotos(userInForm.getPhotos());
+		}
+		userInDB.setFirstname(userInForm.getFirstname());
+		userInDB.setLastname(userInForm.getLastname());
+		
+		return userRepo.save(userInDB);
+	}
+	
 		
 }
 
