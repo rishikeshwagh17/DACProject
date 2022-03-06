@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
 //spring config class
 @Configuration
 //enable security
@@ -53,8 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.formLogin()
 		.loginPage("/login")
-		.usernameParameter("email").permitAll()
-		.and().logout().permitAll().and().rememberMe();
+		.usernameParameter("email").permitAll() 
+		.and().logout().permitAll().and().rememberMe().key("rem-me-key").rememberMeParameter("remember");
 		
 		
 	}
