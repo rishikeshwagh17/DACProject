@@ -103,6 +103,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<a th:href="@{/categories/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
 				
 	</div>
+	
+	<div th:if="${message!=null}" class="alert alert-success text-center">[[${message}]]</div>
+	
 	<div>	
 	<form th:action="@{/categories/page/1}" class="form-inline m-3">
 			
@@ -148,7 +151,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 							th:href="@{'/categories/edit/' + ${cat.id}}" title="Edit this user"></a>
 							&nbsp; 
 						<a class="fas fa-trash-alt link-delete"
-							th:href="@{'/users/delete/' + ${cat.id}}" th:catId="${cat.id}"
+							th:href="@{'/categories/delete/' + ${cat.id}}" th:catId="${cat.id}"
 							title="Delete this user"></a>
 						</td>
 				</tr>
