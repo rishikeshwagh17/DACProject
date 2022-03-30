@@ -2,6 +2,7 @@ package com.buyMe.admin.category;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -33,8 +34,8 @@ public class CategoryRepositoryTests {
 	//test method for child categories
 	@Test
 	public void testCreateSubCategory() {
-		Category parent = new Category(5);
-		Category subCategory = new Category("Memory",parent);
+		Category parent = new Category(7);
+		Category subCategory = new Category("iphone",parent);
 		Category savedCategory = repo.save(subCategory);
 		assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
@@ -61,8 +62,22 @@ public class CategoryRepositoryTests {
 				Set<Category> children = category.getChildren();
 				for (Category subCategory : children) {
 					System.out.println("-->" + subCategory.getName());
+					printChildren(subCategory,1);
 				}
 			}
+		}
+	}
+	
+	private void printChildren(Category parent,int subLevel) {
+		int newsubLevel = subLevel +1;
+		Set<Category> children = parent.getChildren();
+		for (Category subCategory : children) {
+			for (int i = 0; i < newsubLevel; i++) {
+				System.out.print("--");
+			}
+			System.out.println(subCategory.getName());
+			
+			printChildren(subCategory, newsubLevel);
 		}
 	}
 	
