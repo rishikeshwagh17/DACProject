@@ -12,4 +12,8 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 	//this method return top level categories
 	@Query("SELECT c FROM Category c WHERE c.parent.id is NULL")
 	public List<Category> findRootCategories();
+	
+	public Category findByName(String name);
+	
+	public Category findByAlias(String alias);
 }

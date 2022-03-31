@@ -100,5 +100,23 @@ public class CategoryService {
 			throw new CategoryNotFoundException("could not find any category with ID" + id);
 		}
 	}
+
+	//method to check uniqueness of the category based on name and alias
+	public String checkUnique(Integer id, String name, String alias) {
+		boolean isCreatingNew = (id == null || id == 0);
+		Category categoryByName = repo.findByName(name);
+		if (isCreatingNew) {
+			if (categoryByName != null) {
+				return "DuplicateName";
+			}else {
+				Category categoryByAlias = repo.findByAlias(alias);
+				if (categoryByAlias != null) {
+					return "DuplicateAlias";
+				}
+			}
+		}
+		return "ok";
+	}
+	
 	
 }
