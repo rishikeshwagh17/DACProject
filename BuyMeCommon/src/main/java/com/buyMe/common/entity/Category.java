@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "categories")
@@ -34,6 +35,8 @@ public class Category {
 	@JoinColumn(name="parent_id")
 	private Category parent;
 	
+	@OneToMany(mappedBy ="parent")
+	private Set<Category> children = new HashSet<>();
 	
 	//constructor for category class with field name
 	public Category(String name) {
@@ -142,8 +145,12 @@ public class Category {
 	public void setChildren(Set<Category> children) {
 		this.children = children;
 	}
-
-	@OneToMany(mappedBy ="parent")
-	private Set<Category> children = new HashSet<>();
 	
+	@Transient
+	public String getImagePath() {
+		if (this.id == null) {
+			return "/images/image-thumbnail.png";
+		}
+		return "/category-images/" + this.id + "/" + this.image;
+	}
 }

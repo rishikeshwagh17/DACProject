@@ -8,8 +8,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<title>[[${title}]]</title>
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />		
+	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />		
 	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
 	<script type="text/javascript" th:src="@{/js/common.js}" ></script>
@@ -136,7 +135,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			<tbody>
 				<tr th:each="cat : ${listCategories}">
 					<td>[[${cat.id}]]</td>
-					<td></td>
+					<td>
+						<img th:src="@{${cat.imagePath}}" style="width: 100px" class="img-fluid"/>
+					</td>
 					<td>[[${cat.name}]]</td>
 					<td>[[${cat.alias}]]</td>
 					<td>
