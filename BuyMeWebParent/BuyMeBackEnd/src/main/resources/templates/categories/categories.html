@@ -153,17 +153,61 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						</td>
 					<td>
 						<a class="fas fa-edit"
-							th:href="@{'/categories/edit/' + ${cat.id}}" title="Edit this user"></a>
-							&nbsp; 
+							th:href="@{'/categories/edit/' + ${cat.id}}" title="Edit this category"></a>
+							&nbsp;
+						<th:block th:if="${cat.hasChildren == false}">	 
 						<a class="fas fa-trash-alt link-delete"
-							th:href="@{'/categories/delete/' + ${cat.id}}" th:catId="${cat.id}"
-							title="Delete this user"></a>
+							th:href="@{'/categories/delete/' + ${cat.id}}" th:entityId="${cat.id}"
+							title="Delete this category"></a>
 						</td>
+						<th:block>
+					
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	
+	<div class="text-center">
+			<p>BuyMe Control Panel -Copyright &copy; BuyMe</p>
+		</div>
 </div>
+
+<div class="modal fade text-center" id="confirmModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-tittle">Delete Confirmation</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<span id="confirmText"></span>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-success" href="" id="yesButton">Yes</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$(".link-delete").on("click",function(e){
+			e.preventDefault();
+			showDeleteConfirmModal($(this),'category');
+		});
+	});
+
+	function showDeleteConfirmModal(link, entityName){
+		entityId = link.attr("entityId");
+		$("#yesButton").attr("href",link.attr("href"));
+		$("#confirmText").text("Are you sure you want to delete this" + entityName + " ID " + entityId + "?");
+		$("#confirmModal").modal();
+	}
+	
+	function clearFilter(){
+		window.location="[[@{/categories}]]";
+	}
+</script>
 </body>
 </html>

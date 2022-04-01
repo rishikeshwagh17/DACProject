@@ -24,4 +24,7 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 	@Modifying
 	public void updateEnableStatus(Integer id, boolean  enabled);
 	//implement in category service class
+	
+	//count method to count the category and children
+	public Long countById(Integer id);
 }
