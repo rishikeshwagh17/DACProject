@@ -3,6 +3,7 @@ package com.buyMe.admin.category;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -17,4 +18,10 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 	public Category findByName(String name);
 	
 	public Category findByAlias(String alias);
+	
+	//method to set enable status
+	@Query("UPDATE Category c SET c.enabled = ?2 WHERE c.id = ?1")
+	@Modifying
+	public void updateEnableStatus(Integer id, boolean  enabled);
+	//implement in category service class
 }
