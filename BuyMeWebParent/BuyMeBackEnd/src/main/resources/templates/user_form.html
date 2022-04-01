@@ -241,14 +241,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					form.submit();
 				} else if (response == "Duplicated") {
 					// if email is dup then show modal msg
-					showModalDialog("Warning", "There is another user registerd with email " + userEmail);
+					showshowWarningModal("There is another user registerd with email " + userEmail);
 				} else{
-					showModalDialog("Error", "Unknown response from server");
+					showErrorModal("Unknown response from server");
 				}
 
 			}).fail(function(){
 				//if fail then show error msg
-				showModalDialog("Error", "could not connect to server");
+				showErrorModal("could not connect to server");
 			});
 			return false;
 		}
@@ -258,6 +258,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			$("#modalBody").text(message);
 			$("#modalDialog").modal();
 			
+		}
+		
+		function showErrorModal(message){
+			showModalDialog("Error",message);
+		}
+		
+		function showWarningModal(message){
+			showModalDialog("Warning",message);
 		}
 	</script>
 </body>

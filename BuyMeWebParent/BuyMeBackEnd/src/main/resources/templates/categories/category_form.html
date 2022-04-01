@@ -90,6 +90,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<form th:action="@{/categories/save}" method="POST"
 			style="max-width: 500px; margin: 0 auto" 
 			enctype="multipart/form-data"
+			onsubmit="return checkUnique(this)"
 			th:object="${category}">
 			
 			<!-- hidden so id not known -->
@@ -157,7 +158,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			</div>
 		</form>
 		
-		<!-- show modal dialouge box show warning message if email unique -->
+		<!-- show modal dialouge box show warning message if category not unique -->
 	<div class="modal fade text-center" id="modalDialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -209,6 +210,48 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			}
 			reader.readAsDataURL(file);
 		};
+		
+		function checkUnique(form){
+			catId = $("#id").val();
+			catName = $("#name").val();
+			catAlias = $("#alias").val();
+			
+			csrfValue = $("input[name='_csrf']").val();
+			
+			url = "[[@{/categories/check_unique}]]";
+			
+			params = {id: catId,name: catName,alias: catAlias, _csrf: csrfValue};
+			$.post(url,params,function(response){
+				if(response == "OK"){
+					form.submit();
+				}else if(response == "DuplicateName"){
+					showWarningModal("There is another category having same name " + catName)
+				}else if(response == "DuplicateAlias"){
+					showWarningModal("There is another category having same alias " + catAlias)
+				}else{
+					showErrorModal("Unknown response from server");
+				}
+			}).fail(function(){
+				showErrorModal("could not connect to server");
+			});
+			
+			return false;
+		}
+		
+		function showModalDialog(title, message) {
+			$("#modalTitle").text(title);
+			$("#modalBody").text(message);
+			$("#modalDialog").modal();
+			
+		}
+		
+		function showErrorModal(message){
+			showModalDialog("Error",message);
+		}
+		
+		function showWarningModal(message){
+			showModalDialog("Warning",message);
+		}
 		
 	</script>
 </body>
