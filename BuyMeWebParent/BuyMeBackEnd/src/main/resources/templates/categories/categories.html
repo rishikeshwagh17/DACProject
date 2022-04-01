@@ -145,13 +145,12 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					</td>
 					<td>[[${cat.name}]]</td>
 					<td>[[${cat.alias}]]</td>
-					<td>
-						<a th:if="${cat.enabled == true}"
-							class="fas fa-check-circle" style="color:green" th:href="@{'/categories/' + ${cat.id} + '/enabled/false'}" title="disable this user"></a>
+					<td><a th:if="${cat.enabled == true}"
+							class="fas fa-check-circle" style="color:green" th:href="@{'/categories/' + ${cat.id} + '/enabled/false'}" title="disable this category"></a>
 							<a
 							th:if="${cat.enabled == false}"
-							class="fas fa-check-circle" style="color:red" th:href="@{'/categories/' + ${cat.id} + '/enabled/true'}" title="enable this user"></a>
-					</td>
+							class="fas fa-check-circle" style="color:red" th:href="@{'/categories/' + ${cat.id} + '/enabled/true'}" title="enable this category"></a>
+						</td>
 					<td>
 						<a class="fas fa-edit"
 							th:href="@{'/categories/edit/' + ${cat.id}}" title="Edit this user"></a>
