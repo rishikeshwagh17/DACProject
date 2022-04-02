@@ -14,23 +14,21 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		// TODO Auto-generated method stub
-		//to expose directory on the file system aceesible for clients
-		String dirName = "user-photos";
-		Path userPhotosDir = Paths.get(dirName);
+		exposeDirectory("user-photos", registry);
+		exposeDirectory("../category-images", registry);
+		exposeDirectory("../brand-logos", registry);
+		exposeDirectory("../product-images", registry);
+		exposeDirectory("../site-logo", registry);
+	}
+	
+	private void exposeDirectory(String pathPattern, ResourceHandlerRegistry registry) {
+		Path path = Paths.get(pathPattern);
+		String absolutePath = path.toFile().getAbsolutePath();
 		
-		String userPhotosPath = userPhotosDir.toFile().getAbsolutePath();
-		
-		registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + userPhotosPath + "/");
-		
-		//add method to expose directory on file system accessible for client for categories
-		String categoryImageDirName = "../category-images";
-		Path categoryImagesDir = Paths.get(categoryImageDirName);
-		
-		String categoryImagesPath = categoryImagesDir.toFile().getAbsolutePath();
-		
-		registry.addResourceHandler("/category-images/**").addResourceLocations("file:/" + categoryImagesPath + "/");
-		
+		String logicalPath = pathPattern.replace("../", "") + "/**";
+				
+		registry.addResourceHandler(logicalPath)
+			.addResourceLocations("file:/" + absolutePath + "/");		
 	}
 	
 }
