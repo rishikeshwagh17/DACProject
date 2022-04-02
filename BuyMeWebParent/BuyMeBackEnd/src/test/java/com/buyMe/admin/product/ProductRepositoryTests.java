@@ -61,4 +61,27 @@ public class ProductRepositoryTests {
 		
 		iterableProducts.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testGetProduct() {
+		Integer id = 2;
+		Product product = repo.findById(id).get();
+		System.out.println(product);
+		
+		assertThat(product).isNotNull();
+	}
+	
+	@Test
+	public void testUpdateProduct() {
+		Integer id = 1;
+		Product product = repo.findById(id).get();
+		product.setPrice(499);
+		
+		repo.save(product);
+		
+		Product updatedProduct = entityManager.find(Product.class, id);
+		
+		assertThat(updatedProduct.getPrice()).isEqualTo(499);
+	}
+	
 }
