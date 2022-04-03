@@ -1,4 +1,4 @@
-package com.buyMe.site;
+package com.buyMe;
 
 
 import org.springframework.stereotype.Controller;
