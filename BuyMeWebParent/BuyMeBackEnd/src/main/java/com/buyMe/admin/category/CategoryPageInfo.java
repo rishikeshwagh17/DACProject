@@ -3,6 +3,7 @@ package com.buyMe.admin.category;
 public class CategoryPageInfo {
 	private int totalPages;
 	private long totalElements;
+	
 	public int getTotalPages() {
 		return totalPages;
 	}
@@ -16,4 +17,6 @@ public class CategoryPageInfo {
 		this.totalElements = totalElements;
 	}
 	
+	
 }
+

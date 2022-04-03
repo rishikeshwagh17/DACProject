@@ -11,28 +11,23 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.buyMe.common.entity.Category;
 
-public interface CategoryRepository extends PagingAndSortingRepository<Category, Integer>{
-	
-	//this method return top level categories
+public interface CategoryRepository extends PagingAndSortingRepository<Category, Integer> {
 	@Query("SELECT c FROM Category c WHERE c.parent.id is NULL")
 	public List<Category> findRootCategories(Sort sort);
-	
-	@Query("SELECT c FROM Category c WHERE c.name LIKE %?1%")
-	public Page<Category> search(String keyword,Pageable pageable);
-	
+
 	@Query("SELECT c FROM Category c WHERE c.parent.id is NULL")
 	public Page<Category> findRootCategories(Pageable pageable);
+	
+	@Query("SELECT c FROM Category c WHERE c.name LIKE %?1%")
+	public Page<Category> search(String keyword, Pageable pageable);
+	
+	public Long countById(Integer id);
 	
 	public Category findByName(String name);
 	
 	public Category findByAlias(String alias);
 	
-	//method to set enable status
 	@Query("UPDATE Category c SET c.enabled = ?2 WHERE c.id = ?1")
 	@Modifying
-	public void updateEnableStatus(Integer id, boolean  enabled);
-	//implement in category service class
-	
-	//count method to count the category and children
-	public Long countById(Integer id);
+	public void updateEnabledStatus(Integer id, boolean enabled);	
 }
