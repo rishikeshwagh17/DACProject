@@ -83,4 +83,9 @@ public class BuyMeUserDetails implements UserDetails {
 	public void setLastName(String lastname) {
 		this.user.setLastname(lastname);
 	}
+
+	
+	public boolean hasRole(String roleName) {
+		return user.hasRole(roleName);
+	}
 }
