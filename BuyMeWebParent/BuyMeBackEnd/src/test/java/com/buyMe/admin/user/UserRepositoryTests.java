@@ -20,16 +20,13 @@ import org.springframework.test.annotation.Rollback;
 import com.buyMe.common.entity.Role;
 import com.buyMe.common.entity.User;
 
-@DataJpaTest
-// to use the test on real database
+@DataJpaTest(showSql = false)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Rollback(true)
+@Rollback(false)
 public class UserRepositoryTests {
-	//ref to user repo
 	@Autowired
 	private UserRepository repo;
-	
-	//add test entity manager by spring data jpa
+
 	@Autowired
 	private TestEntityManager entityManager;
 
@@ -40,7 +37,7 @@ public class UserRepositoryTests {
 		sachin.addRole(roleAdmin);
 
 		User savedUser = repo.save(sachin);
-		// to check object is persistent or not
+
 		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
 
@@ -80,7 +77,7 @@ public class UserRepositoryTests {
 	
 	@Test
 	public void testUpdateUserRoles() {
-		User userRavi = repo.findById(2).get();
+		User userRavi = repo.findById(3).get();
 		Role roleEditor = new Role(3);
 		Role roleSalesperson = new Role(2);
 		
@@ -93,61 +90,65 @@ public class UserRepositoryTests {
 	public void testDeleteUser() {
 		Integer userid = 2;
 		repo.deleteById(userid);
-		//if user id is not there it will thow exception
-		repo.findById(userid);
 	}
 	
 	@Test
 	public void testGetUserByEmail() {
-		//should fail for email not avail in db
-		String email="mike@gmail.com";
+		//should fail for email not avail
+		String email="newemail@gmail.com";
 		User user = repo.getUserByEmail(email);
 		assertThat(user).isNotNull();
 	}
 	
 	@Test
 	public void testCountById() {
-		Integer id=2;
+		Integer id=4;
 		Long countById = repo.countById(id);
 		
 		assertThat(countById).isNotNull().isGreaterThan(0);
 	}
 	
 	@Test
-	public void testDisaledUser() {
-		Integer id = 2;
+	public void testDisableUser() {
+		Integer id=1;
 		repo.updateEnabledStatus(id, false);
 	}
 	
 	@Test
-	public void testEnaledUser() {
-		Integer id = 2;
+	public void testEnableUser() {
+		Integer id=3;
 		repo.updateEnabledStatus(id, true);
 	}
-	
-	//test to check the paging of users if more users there
+
 	@Test
 	public void testListFirstPage() {
 		int pageNumber = 0;
-		int pageSize = 4;
+		int pageSize = 3;
+		
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
-		 Page<User> page=repo.findAll(pageable);
-		  List<User> listUsers= page.getContent();
-		  listUsers.forEach(user -> System.out.println(user));
-		  assertThat(listUsers.size()).isEqualTo(pageSize);
+		Page<User> page = repo.findAll(pageable);
+		
+		List<User> listUsers = page.getContent();
+		
+		listUsers.forEach(user -> System.out.println(user));
+		
+		assertThat(listUsers.size()).isEqualTo(pageSize);
 	}
-	
-	//test method for searching
+
 	@Test
 	public void testSearchUsers() {
-		String Keyword = "Rishi";
-		
+		String keyword = "ravi";
+	
 		int pageNumber = 0;
-		int pageSize = 4;
+		int pageSize = 3;
+		
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
-		 Page<User> page=repo.findAll(Keyword,pageable);
-		  List<User> listUsers= page.getContent();
-		  listUsers.forEach(user -> System.out.println(user));
-		  assertThat(listUsers.size()).isGreaterThan(0);
+		Page<User> page = repo.findAll(keyword, pageable);
+		
+		List<User> listUsers = page.getContent();
+		
+		listUsers.forEach(user -> System.out.println(user));	
+		
+		assertThat(listUsers.size()).isGreaterThan(0);
 	}
 }

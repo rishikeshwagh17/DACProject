@@ -144,4 +144,10 @@ public class CategoryController {
 		return "redirect:/categories";
 	}
 	
+	@GetMapping("/categories/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<Category> listCategories = service.listCategoriesUsedInForm();
+		CategoryCsvExporter exporter = new CategoryCsvExporter();
+		exporter.export(listCategories, response);
+	}
 }

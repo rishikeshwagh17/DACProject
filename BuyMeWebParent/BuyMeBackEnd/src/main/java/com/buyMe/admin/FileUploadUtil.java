@@ -12,21 +12,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadUtil {
-	
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadUtil.class);
-	//utility class so using static method
-	//method to get get photo upload directory and and saving the file using IO handling
-	public static void saveFile(String uploadDir,String fileName, MultipartFile multipartFile) throws IOException {
+	
+	public static void saveFile(String uploadDir, String fileName, 
+			MultipartFile multipartFile) throws IOException {
 		Path uploadPath = Paths.get(uploadDir);
 		
-		if(!Files.exists(uploadPath)) {
+		if (!Files.exists(uploadPath)) {
 			Files.createDirectories(uploadPath);
 		}
-		try (InputStream input = multipartFile.getInputStream()) {
+		
+		try (InputStream inputStream = multipartFile.getInputStream()) {
 			Path filePath = uploadPath.resolve(fileName);
-			Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			throw new IOException("could not save file: " + fileName, e);
+			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException ex) {
+			throw new IOException("Could not save file: " + fileName, ex);
 		}
 	}
 	
@@ -38,13 +38,12 @@ public class FileUploadUtil {
 				if (!Files.isDirectory(file)) {
 					try {
 						Files.delete(file);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						System.out.println("could not delete file : " + file);
+					} catch (IOException ex) {
+						LOGGER.error("Could not delete file: " + file);
 					}
 				}
 			});
-		} catch (IOException e) {
+		} catch (IOException ex) {
 			LOGGER.error("Could not list directory: " + dirPath);
 		}
 	}
@@ -54,11 +53,9 @@ public class FileUploadUtil {
 		
 		try {
 			Files.delete(Paths.get(dir));
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (IOException e) {
 			LOGGER.error("Could not remove directory: " + dir);
 		}
+		
 	}
-
-	
 }

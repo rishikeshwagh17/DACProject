@@ -11,94 +11,68 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.RememberMeServices;
-//spring config class
 @Configuration
-//enable security
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	//method for getting userdeatils service
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Bean
-	public UserDetailsService userDetails() {
-		return new BuymeUserDetailsService();
+	public UserDetailsService userDetailsService() {
+		return new BuyMeUserDetailsService();
 	}
 	
-	//method for authentication provider tell security look user in the database and authenticate it
-	public DaoAuthenticationProvider authenticate() {
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetails());
-		authProvider.setPasswordEncoder(PasswordEncoder());
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+		
 		return authProvider;
 	}
 	
-	//override method to configure the authentication provider
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authenticate());
+		auth.authenticationProvider(authenticationProvider());
 	}
-	
-	//password encoder function
-	//look mams function
-	@Bean
-	public PasswordEncoder PasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
-	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
 		http.authorizeRequests()
-		.antMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
-		.antMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
-		
-		.antMatchers("/products/new", "/products/delete/**").hasAnyAuthority("Admin", "Editor")
-		
-		.antMatchers("/products/edit/**", "/products/save", "/products/check_unique")
-			.hasAnyAuthority("Admin", "Editor", "Salesperson")
+			.antMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
+			.antMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
 			
-		.antMatchers("/products", "/products/", "/products/detail/**", "/products/page/**")
-			.hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+			.antMatchers("/products/new", "/products/delete/**").hasAnyAuthority("Admin", "Editor")
 			
-		.antMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
-		
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()			
-			.loginPage("/login")
-			.usernameParameter("email")
-			.permitAll()
-		.and().logout().permitAll()
-		.and()
-			.rememberMe()
-				.key("AbcDefgHijKlmnOpqrs_1234567890")
-				.tokenValiditySeconds(7 * 24 * 60 * 60);
-		
-		
+			.antMatchers("/products/edit/**", "/products/save", "/products/check_unique")
+				.hasAnyAuthority("Admin", "Editor", "Salesperson")
+				
+			.antMatchers("/products", "/products/", "/products/detail/**", "/products/page/**")
+				.hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+				
+			.antMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
+			
+			.anyRequest().authenticated()
+			.and()
+			.formLogin()			
+				.loginPage("/login")
+				.usernameParameter("email")
+				.permitAll()
+			.and().logout().permitAll()
+			.and()
+				.rememberMe()
+					.key("AbcDefgHijKlmnOpqrs_1234567890")
+					.tokenValiditySeconds(7 * 24 * 60 * 60);
+					;
+			
 	}
 
-	//also we have to override for showing static resources
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		// TODO Auto-generated method stub
-		//webjars because we keep bootstrap and css under webjars
-		web.ignoring().antMatchers("/images/**","/css/**","/script/**","/webjars/**");
-	
+		web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
 	}
-	
-	
-	
-	
-	//old method
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		// TODO Auto-generated method stub
-//		//permit request
-//		//prev we allowed any request
-//		http.authorizeRequests().anyRequest().permitAll();
-//	}
-	
-	
 
+	
 }

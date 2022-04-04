@@ -16,50 +16,48 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
-//user table creation
 @Entity
 @Table(name = "users")
 public class User {
-	//id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	//mail must be unique
+	
 	@Column(length = 128, nullable = false, unique = true)
 	private String email;
-	//password also we need to encrypt it so length must be 64 min
+	
 	@Column(length = 64, nullable = false)
 	private String password;
-	//fname
+	
 	@Column(name = "first_name", length = 45, nullable = false)
-	private String firstname;
-	//lname
+	private String firstName;
+	
 	@Column(name = "last_name", length = 45, nullable = false)
-	private String lastname;
-
+	private String lastName;
+	
 	@Column(length = 64)
 	private String photos;
-	//enabled status
+	
 	private boolean enabled;
 	
-	//relation between roles and user & hashset to avoid duplicate entries
-	//unidiretional from user to role
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(
+			name = "users_roles",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+			)
 	private Set<Role> roles = new HashSet<>();
-
+	
 	public User() {
-
 	}
-	//constructor for user with specific fields
-	public User(String email, String password, String firstname, String lastname) {
-		super();
+	
+	public User(String email, String password, String firstName, String lastName) {
 		this.email = email;
 		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -85,20 +83,20 @@ public class User {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPhotos() {
@@ -124,24 +122,27 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	//method to add role
+	
 	public void addRole(Role role) {
 		this.roles.add(role);
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", roles=" + roles + "]";
 	}
 	
-	//method to return photo image path
 	@Transient
 	public String getPhotosImagePath() {
-		if (id == null || photos == null) {
-			return "/images/default-user.png";
-		}
+		if (id == null || photos == null) return "/images/default-user.png";
+		
 		return "/user-photos/" + this.id + "/" + this.photos;
+	}
+	
+	@Transient
+	public String getFullName() {
+		return firstName + " " + lastName;
 	}
 	
 	public boolean hasRole(String roleName) {

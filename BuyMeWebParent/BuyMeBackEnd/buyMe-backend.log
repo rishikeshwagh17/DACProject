@@ -1,0 +1,30 @@
+2022-02-28 16:34:26.557  INFO 6424 --- [restartedMain] com.buyMe.admin.BuyMeBackEndApplication  : Starting BuyMeBackEndApplication using Java 11.0.12 on DESKTOP-2QBTADJ with PID 6424 (D:\SWAPNIL\Cdac\Project\ProjectApp\BuyMeProject\BuyMeWebParent\BuyMeBackEnd\target\classes started by Admin in D:\SWAPNIL\Cdac\Project\ProjectApp\BuyMeProject\BuyMeWebParent\BuyMeBackEnd)
+2022-02-28 16:34:26.558  INFO 6424 --- [restartedMain] com.buyMe.admin.BuyMeBackEndApplication  : No active profile set, falling back to default profiles: default
+2022-02-28 16:34:27.319  INFO 6424 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-28 16:34:27.462  INFO 6424 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85 ms. Found 2 JPA repository interfaces.
+2022-02-28 16:34:27.740  INFO 6424 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-28 16:34:27.743  INFO 6424 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-28 16:34:27.744  INFO 6424 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-28 16:34:27.844  INFO 6424 --- [restartedMain] o.a.c.c.C.[.[localhost].[/BuyMeAdmin]    : Initializing Spring embedded WebApplicationContext
+2022-02-28 16:34:27.845  INFO 6424 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1280 ms
+2022-02-28 16:34:27.956  INFO 6424 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-28 16:34:28.006  INFO 6424 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2022-02-28 16:34:28.093  INFO 6424 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2022-02-28 16:34:28.094  INFO 6424 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-02-28 16:34:28.299  INFO 6424 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-28 16:34:28.301  INFO 6424 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-28 16:34:28.380  WARN 6424 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-28 16:34:28.588  INFO 6424 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 2fd5ae13-ea40-4f95-89f5-7c16ebf00651
+
+2022-02-28 16:34:28.612  INFO 6424 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1d12b0b7, org.springframework.security.web.context.SecurityContextPersistenceFilter@21545649, org.springframework.security.web.header.HeaderWriterFilter@4881c89d, org.springframework.security.web.csrf.CsrfFilter@7cee9a8b, org.springframework.security.web.authentication.logout.LogoutFilter@1d6b49fa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@44aeabe6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@22d46ce, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@198c0962, org.springframework.security.web.session.SessionManagementFilter@2966ab2c, org.springframework.security.web.access.ExceptionTranslationFilter@26687ee3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@68cdf7e4]
+2022-02-28 16:34:28.762  INFO 6424 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-02-28 16:34:29.300  INFO 6424 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-02-28 16:34:29.317  INFO 6424 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/BuyMeAdmin'
+2022-02-28 16:34:29.323  INFO 6424 --- [restartedMain] com.buyMe.admin.BuyMeBackEndApplication  : Started BuyMeBackEndApplication in 2.914 seconds (JVM running for 172.377)
+2022-02-28 16:34:29.325  INFO 6424 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-02-28 16:44:43.526  INFO 6424 --- [RMI TCP Connection(25)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-02-28 16:44:44.497  INFO 6424 --- [RMI TCP Connection(25)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-02-28 16:44:44.576  INFO 6424 --- [RMI TCP Connection(25)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2022-02-28 16:44:44.627  INFO 6424 --- [RMI TCP Connection(25)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.

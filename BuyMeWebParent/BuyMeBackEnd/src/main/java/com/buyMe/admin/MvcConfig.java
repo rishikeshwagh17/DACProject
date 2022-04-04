@@ -1,7 +1,5 @@
 package com.buyMe.admin;
 
-
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -30,5 +28,5 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addResourceHandler(logicalPath)
 			.addResourceLocations("file:/" + absolutePath + "/");		
 	}
-	
+
 }

@@ -53,8 +53,8 @@ public class BrandRepositoryTests {
 	public void testCreateBrand3() {
 		Brand samsung = new Brand("Samsung");
 		
-		samsung.getCategories().add(new Category(7));	// category memory
-		samsung.getCategories().add(new Category(12));	// category internal hard drive
+		samsung.getCategories().add(new Category(29));	// category memory
+		samsung.getCategories().add(new Category(24));	// category internal hard drive
 		
 		Brand savedBrand = repo.save(samsung);
 		
@@ -80,7 +80,7 @@ public class BrandRepositoryTests {
 	@Test
 	public void testUpdateName() {
 		String newName = "Samsung Electronics";
-		Brand samsung = repo.findById(4).get();
+		Brand samsung = repo.findById(3).get();
 		samsung.setName(newName);
 		
 		Brand savedBrand = repo.save(samsung);

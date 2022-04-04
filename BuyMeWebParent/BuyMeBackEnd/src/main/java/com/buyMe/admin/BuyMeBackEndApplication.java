@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan({"com.buyMe.common.entity","com.buyMe.admin.user"})
+@EntityScan({"com.buyMe.common.entity"})
 public class BuyMeBackEndApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BuyMeBackEndApplication.class, args);
-	} 
+	}
 
 }

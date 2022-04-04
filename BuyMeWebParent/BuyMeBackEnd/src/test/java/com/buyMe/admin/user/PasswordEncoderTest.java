@@ -9,14 +9,11 @@ public class PasswordEncoderTest {
 	
 	@Test
 	public void testEncodePassword() {
-		//create bcrypt instance
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		//give some passcode
-		String rawPassword = "Swap1234";
-		//encode it using encode method
+		String rawPassword = "Swap123";
 		String encodedPassword = passwordEncoder.encode(rawPassword);
 		System.out.println(encodedPassword);
-		//check two password matches or not with matches method
+		
 		boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
 		assertThat(matches).isTrue();
 	}
