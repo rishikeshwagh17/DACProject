@@ -1,4 +1,4 @@
-package com.buyMe.admin.setting.state;
+package com.buyMe.common.entity;
 
 public class StateDTO {
 	private Integer id;

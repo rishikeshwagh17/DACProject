@@ -16,6 +16,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 	
 	public Product findByAlias(String alias);
 	
+	//query for fulltext search functionality it is mysql query not jpa query so w use tables instead of objects entity
 	@Query(value = "SELECT * FROM products WHERE enabled = true AND "
 			+ "MATCH(name, short_description, full_description) AGAINST (?1)", 
 			nativeQuery = true)

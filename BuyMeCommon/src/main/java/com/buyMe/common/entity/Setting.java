@@ -6,17 +6,19 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+//entity for setting
+//table settings
 @Entity
 @Table(name = "settings")
 public class Setting {
+	//key for settings
 	@Id
 	@Column(name = "`key`", nullable = false, length = 128)
 	private String key;
-	
+	//value for settings type(Enum)
 	@Column(nullable = false, length = 1024)
 	private String value;
-	
+	//enum for setting category
 	@Enumerated(EnumType.STRING)
 	@Column(length = 45, nullable = false)
 	private SettingCategory category;
