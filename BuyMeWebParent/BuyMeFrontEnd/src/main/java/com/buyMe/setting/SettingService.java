@@ -17,4 +17,12 @@ public class SettingService {
 		return repo.findByTwoCategories(SettingCategory.GENERAL, SettingCategory.CURRENCY);
 	}
 	
+	public EmailSettingBag getEmailSettings() {
+		List<Setting> settings = repo.findByCategory(SettingCategory.MAIL_SERVER);
+		settings.addAll(repo.findByCategory(SettingCategory.MAIL_TEMPLATES));
+		
+		return new EmailSettingBag(settings);
+	}
+	
+	//for sending mail we need spring boot dependency sprint boot starter mail
 }
